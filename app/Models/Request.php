@@ -31,4 +31,14 @@ class Request extends Model
     {
         return $this->hasOne(User::class);
     }
+
+    /**
+     * Get the requested offer
+     *
+     * @return HasOne
+     */
+    public function offer(): HasOne
+    {
+        return $this->hasOne(Offer::class);
+    }
 }
