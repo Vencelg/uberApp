@@ -13,7 +13,7 @@ class CreateRequestsTable extends Migration
      */
     public function up()
     {
-        Schema::create('requests', function (Blueprint $table) {
+        Schema::create('requestedRides', function (Blueprint $table) {
             $table->id();
             $table->integer('offer_id');
             $table->integer('user_id');
@@ -30,6 +30,6 @@ class CreateRequestsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('requests');
+        Schema::dropIfExists('requestedRides');
     }
 }
