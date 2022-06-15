@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRequestsTable extends Migration
+class CreateRequestedRidesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateRequestsTable extends Migration
      */
     public function up()
     {
-        Schema::create('requestedRides', function (Blueprint $table) {
+        Schema::create('requested_rides', function (Blueprint $table) {
             $table->id();
             $table->integer('offer_id');
             $table->integer('user_id');
-            $table->string('info');
-            $table->boolean('status');
+            $table->string('info')->nullable();
+            $table->boolean('status')->default(false);
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateRequestsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('requestedRides');
+        Schema::dropIfExists('requested_rides');
     }
 }

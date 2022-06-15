@@ -23,5 +23,6 @@ Route::group(['prefix' => 'auth'], function () {
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::apiResources([
         'offers' => \App\Http\Controllers\OfferController::class,
+        'requested_rides' => \App\Http\Controllers\RequestedRideController::class,
     ]);
 });
