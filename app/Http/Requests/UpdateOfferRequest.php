@@ -28,7 +28,7 @@ class UpdateOfferRequest extends FormRequest
             'finish' => 'string|max:255',
             'price' => 'int',
             'space' => 'int',
-            'departure' => 'timestamp',
+            'departure' => 'date|after_or_equal:today|date_format:Y-m-d\TH:i',
         ];
     }
 }
