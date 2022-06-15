@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class AuthController extends Controller
 {
@@ -47,7 +49,7 @@ class AuthController extends Controller
 
         $user = User::where('email', $request->email)->first();
 
-        if (!$user->exists() || !Hash::check($request->password, $user->password)) {
+        if (!$user || !Hash::check($request->password, $user->password)) {
             return response()->json([
                 'message' => 'Wrong Credentials',
             ], 401);
@@ -82,5 +84,33 @@ class AuthController extends Controller
         return response()->json([
             'message' => 'User logged out'
         ]);
+    }
+
+    public function update(UpdateUserRequest $request): JsonResponse
+    {
+        $request->validated();
+        $user = $request->user();
+
+        if (!$user->exists()) {
+            return response()->json([
+                'error' => 'User does not exist'
+            ], 400);
+        }
+
+        $user->update($request->all());
+
+        if ($request->file('profile_picture')) {
+            $image = $request->file('profile_picture')->store('public/images');
+            $url = url('/') . Storage::url($image);
+            $user->update([
+                'profile_picture' => $url,
+            ]);
+        }
+
+        $user->save();
+
+        return response()->json([
+            'user' => $user
+        ], 200);
     }
 }
