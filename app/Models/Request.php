@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Request extends Model
 {
@@ -25,20 +25,20 @@ class Request extends Model
     /**
      * Get the user that created the request
      *
-     * @return HasOne
+     * @return BelongsTo
      */
-    public function user(): HasOne
+    public function user(): BelongsTo
     {
-        return $this->hasOne(User::class);
+        return $this->belongsTo(User::class);
     }
 
     /**
      * Get the requested offer
      *
-     * @return HasOne
+     * @return BelongsTo
      */
-    public function offer(): HasOne
+    public function offer(): BelongsTo
     {
-        return $this->hasOne(Offer::class);
+        return $this->belongsTo(Offer::class);
     }
 }
