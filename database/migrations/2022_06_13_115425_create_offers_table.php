@@ -21,6 +21,7 @@ class CreateOffersTable extends Migration
             $table->integer('price');
             $table->integer('space');
             $table->timestamp('departure');
+            $table->timestamps();
         });
     }
 

@@ -19,6 +19,7 @@ class CreateRequestsTable extends Migration
             $table->integer('user_id');
             $table->string('info');
             $table->boolean('status');
+            $table->timestamps();
         });
     }
 
