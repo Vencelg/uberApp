@@ -56,7 +56,7 @@ class OfferController extends Controller
      * @param int $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function show($id): JsonResponse
+    public function show(int $id): JsonResponse
     {
         $offer = Offer::with(['requests', 'user'])->where('id', $id)->first();
 
@@ -78,7 +78,7 @@ class OfferController extends Controller
      * @param int $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(UpdateOfferRequest $request, $id): JsonResponse
+    public function update(UpdateOfferRequest $request, int $id): JsonResponse
     {
         $request->validated();
 
@@ -103,7 +103,7 @@ class OfferController extends Controller
      * @param int $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy($id): JsonResponse
+    public function destroy(int $id): JsonResponse
     {
         $offer = Offer::find($id);
 
